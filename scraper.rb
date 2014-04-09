@@ -5,7 +5,7 @@ url = "http://www.lakemac.com.au/da_submitted.aspx?datespan=past14days"
 
 agent = Mechanize.new
 
-page = agent.get(url)
+page = Nokogiri::XML(agent.get(url).body)
 
 page.search("application").each do |app|
   record = {
