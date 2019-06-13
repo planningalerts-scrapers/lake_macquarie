@@ -26,7 +26,6 @@ puts "Getting data in `" + ENV['MORPH_PERIOD'] + "`, changable via MORPH_PERIOD 
 
 
 url = "http://apptracking.lakemac.com.au/modules/ApplicationMaster/default.aspx?page=found" + period + "&4a=437&5=T"
-comment_url = "mailto:council@lakemac.nsw.gov.au"
 
 agent = Mechanize.new
 
@@ -53,7 +52,6 @@ page.search("table.border").search("tr")[1].search("tr").each do |tr|
         "address" => tds[3].inner_html.split("<br>")[0].strip,
         "description" => tds[3].inner_html.split("<br>")[1].strip.split("Description: ")[1],
         "info_url" => (page.uri + tds[0].at('a')["href"]).to_s,
-        "comment_url" => comment_url,
         "date_scraped" => Date.today.to_s,
         "date_received" => Date.new(year, month, day).to_s
       }
